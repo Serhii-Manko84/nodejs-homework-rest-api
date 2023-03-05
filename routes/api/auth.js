@@ -1,6 +1,6 @@
 const express = require("express");
+const { validateBody } = require("../../middlewares");
 const { ctrlWrapper } = require("../../helpers");
-const validateBody = require("../../middlewares");
 const { schemas } = require("../../models/user");
 
 const controllers = require("../../controller/auth");
@@ -17,7 +17,7 @@ router.post(
 //sign in
 router.post(
   "/login",
-  validateBody(schemas.loginSchemas),
+  validateBody(schemas.loginSchema),
   ctrlWrapper(controllers.login)
 );
 
