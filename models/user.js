@@ -2,9 +2,12 @@ const { Schema, model } = require("mongoose");
 const joi = require("joi");
 
 const { handleSaveErrors } = require("../helpers");
+const Joi = require("joi");
 
 const validationUserEmail =
-  /([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/;
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+const allowedSubscription = ["starter", "pro", "business"];
 
 const userSchema = new Schema(
   {
@@ -21,7 +24,7 @@ const userSchema = new Schema(
     },
     subscription: {
       type: String,
-      enum: ["starter", "pro", "business"],
+      enum: allowedSubscription,
       default: "starter",
     },
     token: {
@@ -44,9 +47,16 @@ const loginSchema = joi.object({
   password: joi.string().min(6).required(),
 });
 
+const subscriptionSchema = joi.object({
+  subscription: Joi.string()
+    .valid(...allowedSubscription)
+    .required(),
+});
+
 const schemas = {
   registerSchema,
   loginSchema,
+  subscriptionSchema,
 };
 
 const User = model("user", userSchema);
