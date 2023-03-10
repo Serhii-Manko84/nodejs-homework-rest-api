@@ -8,8 +8,8 @@ const controllers = require("../../controller/contacts");
 const router = express.Router();
 
 router.get("/", authenticate, ctrlWrapper(controllers.getAll));
-router.get("/", authenticate, ctrlWrapper(controllers.getAllPaginate));
-router.get("/", authenticate, ctrlWrapper(controllers.getAllFavorite));
+router.get("/paginate", authenticate, ctrlWrapper(controllers.getAllPaginate));
+router.get("/favorite", authenticate, ctrlWrapper(controllers.getAllFavorite));
 
 router.get("/:id", authenticate, ctrlWrapper(controllers.getById));
 
