@@ -4,6 +4,8 @@ const logout = require("./logout");
 const getCurrent = require("./getCurrent");
 const subscription = require("./subscription");
 const updateAvatar = require("./updateAvatar");
+const verify = require("./verify");
+const resendEmail = require("./resendEmail");
 
 module.exports = {
   register,
@@ -12,4 +14,6 @@ module.exports = {
   getCurrent,
   subscription,
   updateAvatar,
+  verify,
+  resendEmail,
 };
